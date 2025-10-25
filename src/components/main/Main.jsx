@@ -5,60 +5,104 @@ import {
   MDBContainer,
   MDBRow,
   MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
+  
 } from "mdb-react-ui-kit";
 import Event from "./Event";
+import QutoteBanner from "../../Images/Vivekananda’s-neverending-hope-from-the-youth.jpg";
 
 function Main() {
   const cardData = [
     {
       id: 1,
-      title: "Health",
+      title: "Healthcare & Nutrition",
       imageUrl: "fas fa-heartbeat",
       description: [
-        "10 years of impactful healthcare services.",
-        "Benefiting over 250,000 individuals.",
-        "Organized events in Srinagar, Jammu, Anantnag.",
-        "Campaign fund raised: INR 4,00,000.",
+        <ul className="custome-list">
+          <li>
+            Over a Decade of Impactful Service for the Economically Weaker
+            Sections of Society.
+          </li>
+          <li>
+            Arranging facilities, where lack of healthcare often left families
+            vulnerable to exploitation by anti-national elements.
+          </li>
+          <li>
+            Free Distribution of <b style={{color:"#535353ff"}}>75+ tons medicines</b> through medical
+            camps.
+          </li>
+          <li>Transforming healthcare needs in <b style={{color:"#535353ff"}}>2000+ villages.</b></li>
+          <li>Benefitting over <b style={{color:"#535353ff"}}>5,00,000 underprivileged patients.</b> </li>
+          <li>
+            Benefitting <b style={{color:"#535353ff"}}>70,000+ pregnant and lactating women</b>  under the Shishu
+            Kalyan Yojna, tackling malnutrition.
+          </li>
+          <li>
+            Supported <b style={{color:"#535353ff"}}>50,000+ children</b>  under the Swablamban Insurance Scheme,
+            earning national recognition.
+          </li>
+        </ul>,
       ],
     },
     {
       id: 2,
-      title: "Education",
+      title: "Education & Skill Development",
       imageUrl: "fas fa-graduation-cap",
       description: [
-        "12 years of advancing education and skill development.",
-        "Reaching over 300,000 students.",
-        "Workshops conducted in Pulwama, Baramulla, and Kathua.",
-        "Campaign fund raised: INR 5,00,000.",
+        <ul className="custome-list">
+          <li>
+            Sponsored schooling and supplies for children across Zanskar Valley and Kashmir, strengthening through education.
+          </li>
+          <li>
+            Empowering <b style={{color:"#535353ff"}}>100,000+ youth</b>  self-employment opportunities into Insurance and finance domain.
+          </li>
+          <li>
+            Supported the Disability Empowerment Program in association with SNEH for Special abled children fostering empowerment, dignity, and social harmony.
+          </li>
+        </ul>,
       ],
     },
     {
       id: 3,
-      title: "Sports",
+      title: "Sports & Community Engagement",
       imageUrl: "fas fa-trophy",
       description: [
-        "8 years of promoting sports in communities.",
-        "Direct impact on 100,000 participants.",
-        "Events held in Jammu, Poonch, and Udhampur.",
-        "Campaign fund raised: INR 6,50,000.",
+        <ul className="custome-list">
+          <li>
+            Revived local sports in <b style={{color:"#535353ff"}}>Ladakh and Kashmir</b>  by providing equipment and medical support to sportsmen. 
+          </li>
+          <li>
+            Beyond events, Metro Zone Group backs their <b style={{color:"#535353ff"}}>entire journey</b>  in Lawn Tennis and Archery— enabling many to rise from grassroots to <b style={{color:"#535353ff"}}>national and international recognition.</b> 
+          </li>
+           
+        </ul>,
       ],
     },
     {
       id: 4,
-      title: "Womens Empowerment",
-      imageUrl: "fas fa-female",
+      title: "During COVID-19 crisis",
+      imageUrl: "fa-solid fa-virus",
       description: [
-        "7 years of organizing women’s empowerment programs.",
-        "Engaged over 150,000 women in skill development and leadership ",
-        "Programs conducted in Rajouri, Kargil, and Kupwara to uplift local women.",
-        "Funds raised: INR 8,00,000 for women’s education and self-sustainability."
-      ]
+        <ul className="custome-list">
+          <li>
+           Sponsored Oxygen, Medicines to safeguarded <b style={{color:"#535353ff"}}>thousands of families.</b> 
+          </li>
+          <li>
+            Sponsored Disease prevention kits for <b style={{color:"#535353ff"}}>1 lakh+ police personnel</b> being Covid warrior.
+          </li>
+          <li>
+            Sponsored Black Fungus Costliest Medicines during Pandemic and saved life of 18 affected patients.
+          </li>
+          <li>
+            Sponsored Training Program for Disease Prevention.
+          </li>
+          <li>
+            Distribution of Free Food Program for 5000 families during entire pandemic period.
+          </li>
+           
+        </ul>
+      ],
     },
   ];
-  
 
   return (
     <div>
@@ -66,34 +110,96 @@ function Main() {
 
       <div className="container custom-container">
         <div className="containerBody py-5 mt-5">
+          <div style={{ width: "auto" }}>
+            <div
+              className="fw-bold h2 py-3 text-black"
+              style={{
+                fontFamily: "Lato, sans-serif",
+                letterSpacing: "0.5px",
+                borderBottom: "2px solid #095996ff", // Set border size and color here
+                margin: "0 auto",
+              }}
+            >
+              Metro Zone Group: Compassion Beyond Boundaries
+            </div>
+          </div>
+
           <div
-            className="bodytextPara"
+            className="bodytextPara mt-4 h2"
             style={{ fontFamily: "Lato, sans-serif" }}
           >
-            Metrozone Group's CSR initiatives are designed to address both local
-            and global challenges, focusing on the empowerment of underserved
-            communities. Our programmes are aligned with international
-            sustainability goals and are executed in collaboration with
-            governments, NGOs, and other key stakeholders to drive impactful
-            change.
+            The journey of{" "}
+            <b style={{ color: "#191a1bff" }}>Metro Zone Group</b> is not just
+            about corporate milestones — it is a testament to how businesses can
+            be both profitable and purposeful. Since 2014, beyond balance
+            sheets, the Group has championed social transformation across some
+            of India’s most underserved regions, enriching countless lives
+            through gestures both big and small.
           </div>
-
-          <div className="bodytextPara aos-init aos-animate">
-            In the last fiscal year, Metrozone Group dedicated INR 1,095 crore
-            to CSR efforts, positively transforming the lives of over 11.7
-            million individuals across various sectors.
+          <div
+            className="bodytextPara mt-1"
+            style={{ fontFamily: "Lato, sans-serif" }}
+          >
+            In deep collaboration with the{" "}
+            <b style={{ color: "#191a1bff" }}>
+              Indian Army, Assam Rifles, State Police Administrations, Railway
+              Protection Force, Rotary International, National Medicos
+              Organisation (NMO), ISKCON, and Special Needs Education Homes
+              (SNEH), Metro Zone Group
+            </b>{" "}
+            continues to redefine corporate responsibility through compassion in
+            action.
           </div>
-
-          <div className="bodytext aos-init aos-animate">
-            Our projects span education, livelihood enhancement, skill
-            development, rural development, clean water and sanitation,
-            healthcare initiatives, and the improvement of essential services in
-            underserved regions.
+          <div
+            className="bodytextPara mt-1"
+            style={{ fontFamily: "Lato, sans-serif" }}
+          >
+            Reaching far beyond cities and comfort zones, the Group’s
+            initiatives extend to the{" "}
+            <b style={{ color: "#191a1bff" }}>
+              high-altitude and conflict-affected terrains of Kashmir, Kargil,
+              Dras, Suru, Zanskar Valley, Manipur, Assam, Arunachal Pradesh, and
+              the Indo-Nepal border
+            </b>{" "}
+            , as well as the
+            <b style={{ color: "#191a1bff" }}>
+              {" "}
+              underprivileged regions
+            </b> of{" "}
+            <b style={{ color: "#191a1bff" }}>
+              Uttar Pradesh, Madhya Pradesh, and Bihar.
+            </b>
+          </div>
+          <div
+            className="bodytextPara mt-1"
+            style={{ fontFamily: "Lato, sans-serif" }}
+          >
+            Through these meaningful partnerships, Metro Zone Group has been a
+            beacon of hope —{" "}
+            <b style={{ color: "#191a1bff" }}>
+              delivering medical aid, nutritional support, educational
+              opportunities, sports training, and employable skills
+            </b>{" "}
+            to thousands in need. Each initiative reflects a simple belief: that
+            business success holds true meaning only when it uplifts humanity
+            and transforms lives.
+          </div>
+          <div
+            className="bodytextPara mt-1"
+            style={{ fontFamily: "Lato, sans-serif" }}
+          >
+            With every step, Metro Zone Group continues to build a{" "}
+            <i>healthier, stronger, and more compassionate India</i> — where
+            purpose leads profit, and empathy drives excellence.
           </div>
         </div>
 
         <div className="container mx-5 mb-5 d-xl-block d-none">
-          <img src="https://www.tourmyindia.com/blog//wp-content/uploads/2018/10/Vivekananda%E2%80%99s-neverending-hope-from-the-youth.jpg" alt="" style={{height:'22rem',width:"77rem",filter:'sepia(100%)'}} />
+          <img
+            src={QutoteBanner}
+            alt=""
+            style={{ height: "22rem", width: "77rem", filter: "sepia(100%)" }}
+          />
         </div>
 
         <MDBContainer className="py-4 mx-auto ">
@@ -125,16 +231,16 @@ function Main() {
                   ></i>
 
                   {/* Title */}
-                  <h5 className="fw-bold fs-5 text-secondary py-2">
+                  <h5 className="fw-bold fs-5 text-center text-secondary py-2">
                     {card.title}
                   </h5>
 
                   {/* Bullet points */}
                   <ul className="text-start ps-4">
                     {card.description.map((point, idx) => (
-                      <li key={idx} className=" text-secondary h6">
+                      <div key={idx} className=" text-secondary h6">
                         {point}
-                      </li>
+                      </div>
                     ))}
                   </ul>
 

@@ -11,21 +11,21 @@ function Carousel() {
       src: img1,
       caption:
         "The Uttar Pradesh government honors outstanding individuals and organizations with the Recognition for Social Impact award. This initiative celebrates significant contributions in education, healthcare, and poverty alleviation, inspiring community engagement through monetary grants for continued impact.",
-      title: "Jan-Kalyan Award by the UP Government",
+      title: "Felicitation by Govt of Uttar Pradesh",
       tag: "Social",
     },
     {
       src: img2,
       caption:
-        "The Maternal Health Initiative in Kashmir provides essential healthcare services to expectant mothers. Offering prenatal care, nutritional support, and education on maternal health, this program aims to reduce maternal and infant mortality rates while empowering women through increased knowledge and resources.",
-      title: "Maternal Health Initiative in Kashmir",
+        "Since 2014, Metro Zone Group had built deep collaborations with the Indian Army in country’s most challenging and high-altitude regions of Kashmir, Kargil, Dras, Suru, Zanskar valley, Manipur, Assam & Arunachal Pradesh - supporting medical needs, education initiatives, and sports programs.",
+      title: "Sponsoring Operation Sadbhavna a noble initiative of Indian Army, since decade.",
       tag: "",
     },
     {
       src: img3,
       caption:
-        "The Educational Resource Distribution program enhances access for underprivileged children by providing free textbooks and learning materials. This initiative removes educational barriers, fostering a love for learning while including workshops for parents and teachers to promote community engagement.",
-      title: "Educational Resource Distribution for Children",
+        "The Educational Resource Distribution Program empowers underprivileged children by ensuring free access to textbooks, learning materials, and essential educational resources. This initiative aims to bridge the educational gap for students in underserved communities, removing barriers that often hinder their academic growth. Beyond distribution, the program fosters a culture of learning and inclusivity through interactive workshops for parents and teachers, encouraging active participation and stronger community engagement. By nurturing both students and their support systems, Metro Zone Group is helping to build a future where quality education becomes a right, not a privilege.",
+      title: "Educational Resource Distribution for Childrens",
       tag: "Education",
     },
   ];
@@ -128,7 +128,7 @@ function Carousel() {
               left: 0,
               width: "100%",
               height: "620px",
-              background: "rgb(0 0 0 / 50%)",
+              background: "rgb(0 0 0 / 60%)",
               zIndex: 1,
             }}
           />
@@ -143,7 +143,7 @@ function Carousel() {
             <div
               className="bannerT topP20"
               style={{
-                paddingTop: "40px",
+                // paddingTop: "20px",
                 fontFamily: "Lato, sans-serif",
                 fontWeight: "700",
                 fontSize: "43px",
@@ -168,10 +168,10 @@ function Carousel() {
               style={{
                 fontFamily: "Lato, sans-serif",
                 fontWeight: "400",
-                fontSize: "16px",
+                fontSize: "18px",
                 color: "rgb(255, 255, 255)",
                 lineHeight: "22px",
-                maxWidth: "620px",
+                maxWidth: "850px",
                 paddingLeft: "15px",
                 borderLeft: "6px solid rgb(255, 255, 255)",
               }}
