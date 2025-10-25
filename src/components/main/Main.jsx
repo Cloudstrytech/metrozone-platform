@@ -109,7 +109,7 @@ function Main() {
       <Carousel />
 
       <div className="container custom-container">
-        <div className="containerBody py-5 mt-5">
+        <div className="containerBody py-5 px-3 mt-5">
           <div style={{ width: "auto" }}>
             <div
               className="fw-bold h2 py-3 text-black"
