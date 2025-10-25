@@ -12,7 +12,7 @@ const cardData = [
     category: "fas fa-globe fa-2x",
     content: "This card provides additional details on a specific topic.",
     link: "#",
-    color: "rgb(115 110 201)",
+    color: "rgb(115 110 200)",
   },
   {
     title: "Health",
