@@ -25,7 +25,7 @@ function Carousel() {
       src: img3,
       caption:
         "The Educational Resource Distribution Program empowers underprivileged children by ensuring free access to textbooks, learning materials, and essential educational resources. This initiative aims to bridge the educational gap for students in underserved communities, removing barriers that often hinder their academic growth. Beyond distribution, the program fosters a culture of learning and inclusivity through interactive workshops for parents and teachers, encouraging active participation and stronger community engagement. By nurturing both students and their support systems, Metro Zone Group is helping to build a future where quality education becomes a right, not a privilege.",
-      title: "Educational Resource Distribution for Childrens",
+      title: "Educational Resource Distribution for Children",
       tag: "Education",
     },
   ];
