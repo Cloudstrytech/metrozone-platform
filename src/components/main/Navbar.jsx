@@ -1,21 +1,13 @@
 import React, { useEffect, useState } from "react";
-import {
-  MDBNavbar,
-  MDBContainer,
-  MDBNavbarBrand,
-  MDBNavbarToggler,
-  MDBRow,
-  MDBCol,
-} from "mdb-react-ui-kit";
+import { MDBNavbar, MDBContainer } from "mdb-react-ui-kit";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { Button } from "@mui/material";
 import { Collapse, Divider } from "@mui/material";
-import Logo from "../../Images/caro-img/Metrozone-logo.png"
+import Logo from "../../Images/caro-img/Metrozone-logo.png";
 import { Link } from "react-router-dom";
-
 
 function Navbar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -29,7 +21,6 @@ function Navbar() {
     if (screenWidth < 768) {
       setIsMobile(true);
       // setLogoimg("http://www.metrozonegroup.com/images/logo.png")
-
     } else {
       setIsMobile(false);
     }
@@ -88,7 +79,6 @@ function Navbar() {
               color: "white",
               cursor: "pointer",
               textDecoration: "none",
-              
             }}
             className="text-white tg-btn"
             target="_blank"
@@ -96,14 +86,17 @@ function Navbar() {
             {/* <i class="fa fa-bars text-white fs-2" aria-hidden="true"></i> */}
             <img
               src={Logo}
-               style={{  height: "40px",marginRight:'10px' }}
-              
+              style={{ height: "40px", marginRight: "10px" }}
               alt="Metrozone Logo"
               loading="lazy"
-               
             />
-          <span className="text-white fs-4 " style={{fontFamily:"Lato, sans-serif"}}>METROZONE Group</span>
-          </Link> 
+            <span
+              className="text-white fs-4 "
+              style={{ fontFamily: "Lato, sans-serif" }}
+            >
+              METROZONE Group
+            </span>
+          </Link>
 
           {/* Tata Logo */}
           {/* <MDBNavbarBrand
@@ -216,14 +209,18 @@ function Navbar() {
               background: "#1d2739",
             }}
           >
-            <a
-              className=""
-              style={{ cursor: "pointer" }}
+            <button
+              style={{
+                cursor: "pointer",
+                background: "none",
+                border: "none",
+                padding: 0,
+              }}
               onClick={toggleDrawer(false)}
             >
               {/* <i class="fa fa-times fs-1 text-danger mb-3" aria-hidden="true"></i> */}
               <Button className=" bg-danger text-white mb-4">Close</Button>
-            </a>
+            </button>
             <div className="row gx-5">
               <div className="col-2">
                 <div className="">
@@ -265,6 +262,7 @@ function Navbar() {
                         <img
                           src="https://www.tatasustainability.com/images/Menu/ClimateChangeEnergy.png"
                           className="iconImage"
+                          alt="Climate Change Energy"
                         />
                       </a>
                     </div>
@@ -282,6 +280,7 @@ function Navbar() {
                         <img
                           src="https://www.tatasustainability.com/images/Menu/Water.png"
                           className="iconImage"
+                          alt="Water"
                         />
                       </a>
                     </div>
@@ -298,6 +297,7 @@ function Navbar() {
                         <img
                           src="https://www.tatasustainability.com/images/Menu/circular-economy.png"
                           className="iconImage"
+                          alt="Circular Economy"
                         />
                       </a>
                     </div>
@@ -315,6 +315,7 @@ function Navbar() {
                         <img
                           src="https://www.tatasustainability.com/images/Menu/Biodiversity.png"
                           className="iconImage"
+                          alt="Biodiversity"
                         />
                       </a>
                     </div>
@@ -337,6 +338,7 @@ function Navbar() {
                         <img
                           src="https://www.tatasustainability.com/images/Menu/ClimateChangeEnergy.png"
                           className="iconImage"
+                          alt="Climate Change Energy"
                         />
                       </a>
                     </div>
@@ -354,6 +356,7 @@ function Navbar() {
                         <img
                           src="https://www.tatasustainability.com/images/Menu/Water.png"
                           className="iconImage"
+                          alt="Water"
                         />
                       </a>
                     </div>
@@ -370,6 +373,7 @@ function Navbar() {
                         <img
                           src="https://www.tatasustainability.com/images/Menu/circular-economy.png"
                           className="iconImage"
+                          alt="Circular Economy"
                         />
                       </a>
                     </div>
@@ -387,6 +391,7 @@ function Navbar() {
                         <img
                           src="https://www.tatasustainability.com/images/Menu/Biodiversity.png"
                           className="iconImage"
+                          alt="Biodiversity"
                         />
                       </a>
                     </div>
