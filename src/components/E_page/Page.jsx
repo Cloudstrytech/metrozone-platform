@@ -14,6 +14,35 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Logo from "../../Images/caro-img/Metrozone-logo.png";
 
+// Parses text and converts URLs into clickable links that open in a new tab
+const renderDescription = (text) => {
+  if (!text) return null;
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return text.split("\n").map((line, lineIndex) => {
+    const parts = line.split(urlRegex);
+    return (
+      <span key={lineIndex}>
+        {parts.map((part, i) =>
+          urlRegex.test(part) ? (
+            <a
+              key={i}
+              href={part}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#1a73e8", wordBreak: "break-all" }}
+            >
+              {part}
+            </a>
+          ) : (
+            part
+          ),
+        )}
+        {lineIndex < text.split("\n").length - 1 && <br />}
+      </span>
+    );
+  });
+};
+
 function Epage() {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
@@ -23,7 +52,7 @@ function Epage() {
   const [textWidth, setTextWidth] = useState("37rem");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [caroimageheight , setCaroimageheight] = useState('600px');
+  const [caroimageheight, setCaroimageheight] = useState("600px");
 
   const openPopUp = (index) => {
     setSelectedImageIndex(index);
@@ -68,7 +97,7 @@ function Epage() {
       if (window.innerWidth <= 768) {
         setColumnCount(2); // Use 2 columns for phone screens
         setTextWidth("100%");
-        setCaroimageheight('300px');
+        setCaroimageheight("300px");
       } else {
         setColumnCount(3); // Use 3 columns for larger screens
       }
@@ -125,7 +154,6 @@ function Epage() {
               top: 0,
               left: 0,
               transition: "opacity 1s ease-in-out",
-              
             }}
             className="mainImg"
           />
@@ -279,7 +307,9 @@ function Epage() {
             Program Details
           </h2>
           <hr />
-          <div className="bodytextPara">{event.description}</div>
+          <div className="bodytextPara">
+            {renderDescription(event.description)}
+          </div>
 
           {/* <div className="bodytext aos-init aos-animate">
             The Tata group’s activities relate to education, livelihoods and
