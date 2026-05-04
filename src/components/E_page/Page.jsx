@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../main/Main.css";
 import Navbar from "../main/Navbar";
 import "./Page.css";
@@ -53,13 +53,162 @@ function Epage() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [caroimageheight, setCaroimageheight] = useState("600px");
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [zoomScale, setZoomScale] = useState(1);
+  const [zoomOffset, setZoomOffset] = useState({ x: 0, y: 0 });
+
+  const imageContainerRef = useRef(null);
+  const dragStartRef = useRef(null);
+  const pinchStateRef = useRef(null);
+  const lastTapRef = useRef(0);
+  const zoomScaleRef = useRef(1);
+  const zoomOffsetRef = useRef({ x: 0, y: 0 });
+
+  const resetZoom = () => {
+    setZoomScale(1);
+    setZoomOffset({ x: 0, y: 0 });
+    dragStartRef.current = null;
+    pinchStateRef.current = null;
+  };
+
+  const clampOffset = (nextOffset, scale) => {
+    const container = imageContainerRef.current;
+
+    if (!container || scale <= 1) {
+      return { x: 0, y: 0 };
+    }
+
+    const maxX = ((container.clientWidth * scale) - container.clientWidth) / 2;
+    const maxY =
+      ((container.clientHeight * scale) - container.clientHeight) / 2;
+
+    return {
+      x: Math.min(maxX, Math.max(-maxX, nextOffset.x)),
+      y: Math.min(maxY, Math.max(-maxY, nextOffset.y)),
+    };
+  };
+
+  const applyZoomScale = (nextScale) => {
+    const boundedScale = Math.max(1, Math.min(4, nextScale));
+    setZoomScale(boundedScale);
+    setZoomOffset((prevOffset) => clampOffset(prevOffset, boundedScale));
+  };
+
+  const toggleZoom = () => {
+    if (zoomScaleRef.current > 1) {
+      resetZoom();
+      return;
+    }
+
+    const nextScale = 2;
+    setZoomScale(nextScale);
+    setZoomOffset(clampOffset({ x: 0, y: 0 }, nextScale));
+  };
+
+  const getTouchDistance = (touches) => {
+    const [firstTouch, secondTouch] = touches;
+    return Math.hypot(
+      secondTouch.clientX - firstTouch.clientX,
+      secondTouch.clientY - firstTouch.clientY,
+    );
+  };
+
+  const handlePointerDown = (event) => {
+    if (event.pointerType === "touch") return;
+    if (zoomScaleRef.current <= 1) return;
+
+    event.preventDefault();
+    dragStartRef.current = {
+      x: event.clientX - zoomOffsetRef.current.x,
+      y: event.clientY - zoomOffsetRef.current.y,
+    };
+  };
+
+  const handlePointerMove = (event) => {
+    if (event.pointerType === "touch") return;
+    if (!dragStartRef.current || zoomScaleRef.current <= 1) return;
+
+    event.preventDefault();
+    const nextOffset = {
+      x: event.clientX - dragStartRef.current.x,
+      y: event.clientY - dragStartRef.current.y,
+    };
+    setZoomOffset(clampOffset(nextOffset, zoomScaleRef.current));
+  };
+
+  const handlePointerUp = () => {
+    dragStartRef.current = null;
+  };
+
+  const handleTouchStart = (event) => {
+    if (event.touches.length === 2) {
+      pinchStateRef.current = {
+        distance: getTouchDistance(event.touches),
+        scale: zoomScaleRef.current,
+      };
+      dragStartRef.current = null;
+      return;
+    }
+
+    if (event.touches.length === 1 && zoomScaleRef.current > 1) {
+      dragStartRef.current = {
+        x: event.touches[0].clientX - zoomOffsetRef.current.x,
+        y: event.touches[0].clientY - zoomOffsetRef.current.y,
+      };
+    }
+  };
+
+  const handleTouchMove = (event) => {
+    if (event.touches.length === 2 && pinchStateRef.current) {
+      event.preventDefault();
+      const currentDistance = getTouchDistance(event.touches);
+      const nextScale =
+        pinchStateRef.current.scale *
+        (currentDistance / pinchStateRef.current.distance);
+      applyZoomScale(nextScale);
+      return;
+    }
+
+    if (
+      event.touches.length === 1 &&
+      dragStartRef.current &&
+      zoomScaleRef.current > 1
+    ) {
+      event.preventDefault();
+      const nextOffset = {
+        x: event.touches[0].clientX - dragStartRef.current.x,
+        y: event.touches[0].clientY - dragStartRef.current.y,
+      };
+      setZoomOffset(clampOffset(nextOffset, zoomScaleRef.current));
+    }
+  };
+
+  const handleTouchEnd = (event) => {
+    if (event.touches.length < 2) {
+      pinchStateRef.current = null;
+    }
+
+    if (event.touches.length === 0) {
+      dragStartRef.current = null;
+      const now = Date.now();
+
+      if (now - lastTapRef.current < 300) {
+        toggleZoom();
+      }
+
+      lastTapRef.current = now;
+    }
+  };
 
   const openPopUp = (index) => {
     setSelectedImageIndex(index);
+    setActiveSlide(index);
+    resetZoom();
     setIsOpen(true);
   };
 
   const closePopUp = () => {
+    resetZoom();
     setIsOpen(false);
   };
 
@@ -73,8 +222,23 @@ function Epage() {
     adaptiveHeight: true,
     accessibility: true, // Enables keyboard arrow navigation
     focusOnSelect: true,
+    swipe: zoomScale === 1,
+    draggable: zoomScale === 1,
+    touchMove: zoomScale === 1,
+    beforeChange: (_, next) => {
+      setActiveSlide(next);
+      resetZoom();
+    },
     // dots: true,
   };
+
+  useEffect(() => {
+    zoomScaleRef.current = zoomScale;
+  }, [zoomScale]);
+
+  useEffect(() => {
+    zoomOffsetRef.current = zoomOffset;
+  }, [zoomOffset]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -371,12 +535,34 @@ function Epage() {
                     style={{ position: "relative" }}
                   >
                     {/* Image */}
-                    <img
-                      src={image}
-                      alt={image.alt || `image-${index}`}
-                      className="carousel-image"
-                      style={{ width: "100%", height: "auto" }}
-                    />
+                    <div
+                      ref={index === activeSlide ? imageContainerRef : null}
+                      className={`carousel-zoom-frame ${
+                        zoomScale > 1 && index === activeSlide ? "is-zoomed" : ""
+                      }`}
+                      onDoubleClick={toggleZoom}
+                      onPointerDown={handlePointerDown}
+                      onPointerMove={handlePointerMove}
+                      onPointerUp={handlePointerUp}
+                      onPointerLeave={handlePointerUp}
+                      onTouchStart={handleTouchStart}
+                      onTouchMove={handleTouchMove}
+                      onTouchEnd={handleTouchEnd}
+                    >
+                      <img
+                        src={image}
+                        alt={image.alt || `image-${index}`}
+                        className="carousel-image"
+                        style={{
+                          width: "100%",
+                          height: "auto",
+                          transform:
+                            index === activeSlide
+                              ? `translate(${zoomOffset.x}px, ${zoomOffset.y}px) scale(${zoomScale})`
+                              : "translate(0px, 0px) scale(1)",
+                        }}
+                      />
+                    </div>
                     {/* Logo in top-right corner */}
                     <img
                       src={Logo} // Replace this with the actual path to your logo
@@ -458,12 +644,32 @@ function Epage() {
           overflow: hidden;
         }
 
+        .carousel-zoom-frame {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          touch-action: pan-y pinch-zoom;
+          cursor: zoom-in;
+        }
+
+        .carousel-zoom-frame.is-zoomed {
+          cursor: grab;
+          touch-action: none;
+        }
+
         .carousel-image {
           max-width: 100%;
           max-height: 100%;
           object-fit: contain; /* Ensures images maintain aspect ratio */
           width: 1000px;
           height: 100%; /* Ensures the image fills the height uniformly */
+          transition: transform 0.2s ease;
+          transform-origin: center center;
+          user-select: none;
+          -webkit-user-drag: none;
         }
         @media (max-width: 767.98px) {
           .vertical-separator {
